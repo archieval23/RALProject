@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RAL_DevModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ReportTable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="report_id" Type="varchar" MaxLength="150" />
+          <Property Name="PONUMB" Type="int" />
+          <Property Name="POMRCV" Type="int" />
+          <Property Name="ASAUTO" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="POLOC" Type="int" />
+          <Property Name="STRNAM" Type="varchar" MaxLength="250" />
+          <Property Name="POVNUM" Type="int" />
+          <Property Name="ASNAME" Type="varchar" MaxLength="250" />
+          <Property Name="POSDAT" Type="varchar" MaxLength="50" />
+          <Property Name="POCDAT" Type="varchar" MaxLength="50" />
+          <Property Name="IVPLTI" Type="int" />
+          <Property Name="IVPLHI" Type="int" />
+          <Property Name="LOCATION" Type="varchar" MaxLength="150" />
+          <Property Name="INUMBR" Type="int" />
+          <Property Name="IDESCR" Type="varchar" MaxLength="150" />
+          <Property Name="IUPC" Type="varchar" MaxLength="50" />
+          <Property Name="POMUM" Type="varchar" MaxLength="10" />
+          <Property Name="ORDERQTY" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="UserServerDefult">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="ServerName" Type="varchar" MaxLength="100" />
+          <Property Name="created_by" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="date_created" Type="datetime" Nullable="false" />
+          <Property Name="edited_by" Type="varchar" MaxLength="50" />
+          <Property Name="date_edited" Type="datetime" />
+          <Property Name="deleted" Type="bit" Nullable="false" />
+          <Property Name="deleted_by" Type="varchar" MaxLength="50" />
+          <Property Name="date_deleted" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="RAL_DevModelStoreContainer">
+          <EntitySet Name="ReportTable" EntityType="Self.ReportTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserServerDefult" EntityType="Self.UserServerDefult" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RAL_DevModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="UserServerDefult">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ServerName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="created_by" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="date_created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="edited_by" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="date_edited" Type="DateTime" Precision="3" />
+          <Property Name="deleted" Type="Boolean" Nullable="false" />
+          <Property Name="deleted_by" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="date_deleted" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="RAL_DevEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="UserServerDefults" EntityType="Self.UserServerDefult" />
+          <EntitySet Name="ReportTables" EntityType="RAL_DevModel.ReportTable" />
+        </EntityContainer>
+        <EntityType Name="ReportTable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="report_id" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="PONUMB" Type="Int32" />
+          <Property Name="POMRCV" Type="Int32" />
+          <Property Name="ASAUTO" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="POLOC" Type="Int32" />
+          <Property Name="STRNAM" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="POVNUM" Type="Int32" />
+          <Property Name="ASNAME" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="POSDAT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="POCDAT" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IVPLTI" Type="Int32" />
+          <Property Name="IVPLHI" Type="Int32" />
+          <Property Name="LOCATION" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="INUMBR" Type="Int32" />
+          <Property Name="IDESCR" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="IUPC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="POMUM" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ORDERQTY" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RAL_DevModelStoreContainer" CdmEntityContainer="RAL_DevEntities">
+          <EntitySetMapping Name="UserServerDefults">
+            <EntityTypeMapping TypeName="RAL_DevModel.UserServerDefult">
+              <MappingFragment StoreEntitySet="UserServerDefult">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ServerName" ColumnName="ServerName" />
+                <ScalarProperty Name="created_by" ColumnName="created_by" />
+                <ScalarProperty Name="date_created" ColumnName="date_created" />
+                <ScalarProperty Name="edited_by" ColumnName="edited_by" />
+                <ScalarProperty Name="date_edited" ColumnName="date_edited" />
+                <ScalarProperty Name="deleted" ColumnName="deleted" />
+                <ScalarProperty Name="deleted_by" ColumnName="deleted_by" />
+                <ScalarProperty Name="date_deleted" ColumnName="date_deleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReportTables">
+            <EntityTypeMapping TypeName="RAL_DevModel.ReportTable">
+              <MappingFragment StoreEntitySet="ReportTable">
+                <ScalarProperty Name="ORDERQTY" ColumnName="ORDERQTY" />
+                <ScalarProperty Name="POMUM" ColumnName="POMUM" />
+                <ScalarProperty Name="IUPC" ColumnName="IUPC" />
+                <ScalarProperty Name="IDESCR" ColumnName="IDESCR" />
+                <ScalarProperty Name="INUMBR" ColumnName="INUMBR" />
+                <ScalarProperty Name="LOCATION" ColumnName="LOCATION" />
+                <ScalarProperty Name="IVPLHI" ColumnName="IVPLHI" />
+                <ScalarProperty Name="IVPLTI" ColumnName="IVPLTI" />
+                <ScalarProperty Name="POCDAT" ColumnName="POCDAT" />
+                <ScalarProperty Name="POSDAT" ColumnName="POSDAT" />
+                <ScalarProperty Name="ASNAME" ColumnName="ASNAME" />
+                <ScalarProperty Name="POVNUM" ColumnName="POVNUM" />
+                <ScalarProperty Name="STRNAM" ColumnName="STRNAM" />
+                <ScalarProperty Name="POLOC" ColumnName="POLOC" />
+                <ScalarProperty Name="ASAUTO" ColumnName="ASAUTO" />
+                <ScalarProperty Name="POMRCV" ColumnName="POMRCV" />
+                <ScalarProperty Name="PONUMB" ColumnName="PONUMB" />
+                <ScalarProperty Name="report_id" ColumnName="report_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

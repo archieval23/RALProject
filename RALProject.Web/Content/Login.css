@@ -1,0 +1,92 @@
+.cont-div {
+    height: 100vh;
+}
+
+.card-flex-rev {
+    flex-direction: row;
+}
+
+.card-flex-left {
+    width: 100%;
+    display: flex;
+    border-radius: 0.25rem 0 0 0.25rem;
+    background: #b2dffe url(img/temp-image.jpg) center center no-repeat;
+    /* background: url(img/temp-logo2.jpg) center center no-repeat, linear-gradient(#13192f, #13192f, #13192f, #2a1649); */
+}
+
+    .card-flex-left img {
+        width: 100%;
+    }
+
+.card-flex-right {
+    width: 40rem;
+    background-color: #fff;
+    padding: 2.5rem;
+    display: flex;
+    border-radius: 0 0.25rem 0.25rem 0;
+    justify-content: center;
+    flex-direction: column;
+    overflow: auto;
+}
+
+    .card-flex-right .app-logo {
+        margin: 0 auto;
+        width: 4rem;
+    }
+
+    .card-flex-right .lb-login {
+        margin: 1rem auto;
+    }
+
+.login-panel {
+    height: 100vh;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+    border: none;
+}
+
+.form-group.login-form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+    .form-group.login-form i {
+        position: absolute;
+        top: .7rem;
+        left: .7rem;
+        color: #1147a5;
+        /* color: #5a28a0; */
+    }
+
+    .form-group.login-form .login-text {
+        margin-left: auto;
+    }
+
+.login-text-form {
+    padding: 0.375rem 0.75rem 0.375rem 2.25rem;
+}
+
+.login-text {
+    font-size: 0.8rem;
+    color: #1147a5;
+}
+
+.btn.btn-primary {
+    background-color: #1147a5;
+    border-color: #1147a5;
+}
+
+@media (max-width: 992px) {
+    .card-flex-rev {
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .card-flex-left, .card-flex-right {
+        width: 100%;
+    }
+
+    .card-flex-left {
+        height: 12rem;
+    }
+}

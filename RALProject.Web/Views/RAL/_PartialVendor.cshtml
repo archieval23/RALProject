@@ -1,0 +1,40 @@
+﻿@model IEnumerable<RALProject.Web.ViewModels.VendorModel>
+
+<table class="table table-hover table-sm" style="width: 100%;" id="dataTable">
+    <thead class="thead-light">
+        <tr>
+            <th style="display:none;">ID</th>
+            <th>Mnemonic</th>
+            <th>Vendor Number</th>
+            <th>Vendor Name</th>
+            <th>Phone Number</th>
+            <th width="10%" align="center" style="text-align:center;">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Count() != 0)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td style="display: none;">@item.id</td>
+                    <td>@item.mnemonic</td>
+                    <td>@item.vendorNumber</td>
+                    <td>@item.vendorName</td>
+                    <td>@item.phoneNumber</td>
+                    <td style="text-align:center;">
+                        <a href="javacript:;" id="id-select-vendor" class="cls-select-vendor" data-name="edit" data-toggle="tooltip" title="Select Details"><i class="fa fa-eye text text-muted"></i></a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>No projects found. </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Scripts.Render("~/Scripts/RALProject/RALModal.js")

@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title My Blind RAL Application</title>
+    <link rel="shortcut icon" href="~/Content/img/favicon-small.ico" type="image/x-icon" />
+    @Styles.Render("~/Content/css")
+</head>
+<body id="page-top">
+    <div id="wrapper">
+        @{Html.RenderPartial("_SideMenu");}
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                @{Html.RenderPartial("_Header");}
+                <div class="container-fluid wow fadeIn" data-wow-duration='2500ms' data-wow-delay='1000ms'>
+                    @RenderBody()
+                </div>
+
+            </div>
+            @{Html.RenderPartial("_Footer");}
+        </div>
+    </div>
+    <!-- ARROW GO TO TOP -->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="~/Scripts/jquery.validate*"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/scripts/sb-admin-2.min.js"></script>
+    <script src="~/Scripts/main.js"></script>
+    <script src="~/Scripts/wow.min.js"></script>
+    <script src="~/Script/popper.js"></script>
+
+    <script src="~/Scripts/brands.min.js"></script>
+    <script src="~/Scripts/all.min.js"></script>
+    <script src="~/Scripts/fontawesome.min.js"></script>
+    <script src="~/Scripts/fontawesome.js"></script>
+
+    @*@Scripts.Render("~/bundles/jquery")*@
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+    @RenderSection("scripts", required: false)
+</body>
+</html>

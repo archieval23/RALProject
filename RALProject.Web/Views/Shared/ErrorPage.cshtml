@@ -1,0 +1,33 @@
+@{
+    ViewBag.Title = "ITD Core Error Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <h2>ITD Core Error Page</h2>
+
+            <h1>application has encountered a problem</h1>
+
+            <p>
+                The operation you requested has been terminated by the system.
+            </p>
+            <p>
+                <b>Please let the system support team aware of this problem.</b><br />
+                Contact us @@ ALLITDAppDevGroup@retaildomain.com.ph Thank you!
+            </p>
+            <p>
+                A detailed error trace has been created by the system to help the support discover
+                the root cause.
+            </p>
+            <p>
+                To see what error trace contains, <span class="errorTrace"><a class="btn" id="showError" onclick="ShowErrorTrace()" href="#">click here</a></span>.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12" id="errorTrace" style="display: none;">
+            @Html.Raw(TempData["ErrorResult.Exception"])
+        </div>
+    </div>
+</div>

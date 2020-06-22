@@ -1,0 +1,271 @@
+﻿@{
+    //ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card shadow mb-12">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-secondary">Index RAL</h6>
+    </div>
+
+    <div class="card-body">
+        <div class="card shadow mb-12">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-secondary">Expected Receipt Date</h6>
+            </div>
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <span>From:</span>
+                    </div>
+
+                    <div class="col-sm-4">
+                        @Html.TextBox("FromDate", "01/01/0001", new { id = "idFromDate", @class = "datepicker form-control", @type = "date" })
+                    </div>
+                    <br />
+                    <br />
+
+                    <div class="col-sm-2">
+                        <span>To:</span>
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.TextBox("ToDate", "01/01/0001", new { id = "idToDate", @class = "datepicker form-control", @type = "date" })
+                    </div>
+                    <br />
+                    <br />
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row my-1">
+            <div class="col-sm-2">
+                <span>Store Number</span>
+            </div>
+            <div class="col-sm-4">
+                @Html.TextBox("txtBox1", "", new { id = "id-text-storeNumber", @class = "form-control form-control-sm", maxlength = 150 })
+            </div>
+
+            <div class="col-sm-2">
+                <button id="idmodalStore" type="button" class="btn btn-sm btn-outline-secondary" style="width: 50px;">...</button>
+            </div>
+            <div class="col-sm-4">
+                <span id="id-spand-storeName" style="color:blueviolet;font-weight:bold"></span>
+            </div>
+        </div>
+
+        <div class="row my-1">
+            <div class="col-sm-2">
+                <span>Vendor</span>
+            </div>
+            <div class="col-sm-4">
+                @Html.TextBox("txtBox2", "", new { id = "id-text-Vendor", @class = "form-control form-control-sm", maxlength = 150 })
+            </div>
+            <div class="col-1 col-sm-2">
+                <button id="idmodalVendor" type="button" class="btn btn-sm btn-outline-secondary" style="width: 50px;">...</button>
+            </div>
+            <div class="col-sm-4">
+                <span id="id-spand-vendorName" style="color:blueviolet;font-weight:bold"></span>
+            </div>
+        </div>
+
+        <div class="row my-1">
+            <div class="col-sm-2">
+                <span>P.O</span>
+            </div>
+            <div class="col-sm-4">
+                @Html.TextBox("txtBox3", "", new { id = "id-text-PO", @class = "form-control form-control-sm", maxlength = 150 })
+            </div>
+            <div class="col-sm-2">
+                <button id="idmodalPO" type="button" class="btn btn-sm btn-outline-secondary" style="width: 50px;">...</button>
+            </div>
+            <div class="col-sm-4">
+                <span id="id-spand-description" style="color:blueviolet;font-weight:bold"></span>
+            </div>
+        </div>
+
+        <br />
+
+        <button id="id-Accept-button" type="button" class="btn btn-sm btn-primary" style="width: 100px;">Accept</button>
+
+        <br />
+        <br />
+
+        <div id="id-dateFrom-div-message" class="alert alert-danger d-none">
+            <strong>Warning!</strong>
+            <span id="id-datefrom-span-massage"></span>
+            <span class="close">x</span>
+        </div>
+
+        <div id="id-dateTo-div-message" class="alert alert-danger d-none">
+            <strong>Warning!</strong>
+            <span id="id-dateto-span-massage"></span>
+            @*<button type="button" class="close" data-dismiss="alert">&times;</button>*@
+            <span class="close">x</span>
+        </div>
+
+        <div id="id-storenumber-div-message" class="alert alert-danger d-none">
+            <strong>Warning!</strong>
+            <span id="id-storenumber-span-massage"></span>
+            @*<button type="button" class="close" data-dismiss="alert">&times;</button>*@
+            <span class="close">x</span>
+        </div>
+
+        <div id="id-vendor-div-message" class="alert alert-danger d-none">
+            <strong>Warning!</strong>
+            <span id="id-vendor-span-massage"></span>
+            @*<button type="button" class="close" data-dismiss="alert">&times;</button>*@
+            <span class="close">x</span>
+        </div>
+
+        <div id="id-po-div-message" class="alert alert-danger d-none">
+            <strong>Warning!</strong>
+            <span id="id-po-span-massage"></span>
+            @*<button type="button" class="close" data-dismiss="alert">&times;</button>*@
+            <span class="close">x</span>
+        </div>
+
+        <div id="id-entry-div-message" class="alert alert-danger d-none">
+            <strong>Warning!</strong>
+            <span id="id-entry-span-massage"></span>
+            @*<button type="button" class="close" data-dismiss="alert">&times;</button>*@
+            <span class="close">x</span>
+        </div>
+
+        <div id="id-datefromTo-div-message" class="alert alert-danger d-none">
+            <strong>Warning!</strong>
+            <span id="id-datefromTo-span-massage"></span>
+            @*<button type="button" class="close" data-dismiss="alert">&times;</button>*@
+            <span class="close">x</span>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="idModalStoreView" role="dialog" data-backdrop="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="width: 120%;">
+            <div class="modal-header">
+                <h6 class="modal-title pull-left" style="color:red;">Search Store</h6>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <span>Search By:</span>
+                    </div>
+                    <div class="col-sm-4">
+                        <select class="form-control custom-select-sm" id="idsearchFormControlSelect">
+                            <option value="">Please select ...</option>
+                            <option value="Store">Store</option>
+                            <option value="Region">Region</option>
+                            <option value="District">District</option>
+                        </select>
+                    </div>
+                    <br />
+                    <br />
+
+                    <div class="col-sm-2">
+                        <span>Start at Store:</span>
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.TextBox("txtBox4", "", new { id = "id-text-storeNumbet-at", @class = "form-control form-control-sm", maxlength = 150 })
+                    </div>
+                    <br />
+                    <br />
+
+                    <div id="DivStoreList" style="height: 200px; width: 100%; overflow: auto;"></div>
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" style="width: 70px;">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="idModalPOView" role="dialog" data-backdrop="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="width: 120%;">
+            <div class="modal-header">
+                <h6 class="modal-title pull-left" style="color:red;">Search PO</h6>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <span>PO Status:</span>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <span>Released</span>
+                    </div>
+                    <br />
+                    <br />
+
+                    <div class="col-sm-2">
+                        <span>Start at Vendor:</span>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="input-group mb-3">
+                            @Html.TextBox("txtBox4", "", new { id = "id-text-PO-at", @class = "form-control form-control-sm", maxlength = 150 })
+                            <div class="input-group-append">
+                                <button id="id-po-vendor-button" class="btn btn-primary btn-sm" type="button">Search</button>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <br />
+                    <br />
+
+                    <div id="DivPOList" style="height: 200px; width: 100%; overflow: auto;"></div>
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" style="width: 70px;">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="idModalVendorView" role="dialog" data-backdrop="false">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content" style="width: 120%;">
+            <div class="modal-header">
+                <h6 class="modal-title pull-left" style="color:red;">Search Vendor</h6>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-sm-2">
+                        <span>Vendor Mnemonic</span>
+                    </div>
+                    <div class="col-sm-4">
+                        @Html.TextBox("txtBox4", "", new { id = "id-text-vendor-at", @class = "form-control form-control-sm", maxlength = 150 })
+                    </div>
+                    <br />
+                    <br />
+
+                    <div id="DiVendorList" style="height: 200px; width: 100%; overflow: auto;"></div>
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" style="width: 70px;">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="divGetPartialStore" data-request-url="@Url.Action("GetPartialStore", "RAL")"></div>
+<div id="divGetPartialVendor" data-request-url="@Url.Action("GetPartialVendor", "RAL")"></div>
+<div id="divGetPartialPurchaseOrder" data-request-url="@Url.Action("GetPartialPurchaseOrder", "RAL")"></div>
+
+<div id="divReportGeneration" data-request-url="@Url.Action("ReportGeneration", "Report")"></div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+@Scripts.Render("~/Scripts/RALProject/RALProject.js")
