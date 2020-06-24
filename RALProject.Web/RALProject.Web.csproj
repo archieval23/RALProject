@@ -53,6 +53,9 @@
       <HintPath>..\packages\AutoMapper.DataReaderMapper.1.0.6136.33530\lib\net45\AutoMapper.DataReaderMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.1, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.1\lib\itextsharp.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -204,6 +207,7 @@
     <Content Include="Content\fontawesome-all.min.css" />
     <Content Include="Content\fontawesome.css" />
     <Content Include="Content\fontawesome.min.css" />
+    <Content Include="Content\img\ajax-loader.gif" />
     <Content Include="Content\img\banner.png" />
     <Content Include="Content\img\favicon-small.ico" />
     <Content Include="Content\img\favicon.png" />
@@ -220,6 +224,7 @@
     <Content Include="Content\sb-admin-2.min.css" />
     <Content Include="Content\solid.css" />
     <Content Include="Content\solid.min.css" />
+    <Content Include="Content\Stylesheets\snackbar.css" />
     <Content Include="Content\svg-with-js.css" />
     <Content Include="Content\svg-with-js.min.css" />
     <Content Include="Content\v4-shims.css" />

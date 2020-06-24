@@ -40,13 +40,20 @@ namespace RALProject.Web.Controllers
         //
         // GET: /Login/
 
-        public ActionResult Index()
+        public ActionResult Indexs()
         {
             var login = new LoginModel();
             login.business_unit_List = _mapper.Map<IEnumerable<BusinessUnitDto>, IEnumerable<BusinessUnitModel>>
                     (_rALServices.BusinessUnitAll());
-
             return View(login);
+        }
+
+        public ActionResult Index()
+        {
+            var buList = new LoginModel();
+            buList.business_unit_List = _mapper.Map<IEnumerable<BusinessUnitDto>, IEnumerable<BusinessUnitModel>>
+                (_rALServices.BusinessUnitAll());
+            return View(buList);
         }
 
 

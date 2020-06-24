@@ -48,9 +48,12 @@
                 @Html.TextBox("txtBox1", "", new { id = "id-text-storeNumber", @class = "form-control form-control-sm", maxlength = 150 })
             </div>
 
+            @*Button Modal*@
             <div class="col-sm-2">
                 <button id="idmodalStore" type="button" class="btn btn-sm btn-outline-secondary" style="width: 50px;">...</button>
             </div>
+            <div id="divStoreLoader" style="display:none;"> <img src="~/Content/img/ajax-loader.gif" alt="Loader" /> </div>
+            @*Display Store Name at the Right Side*@
             <div class="col-sm-4">
                 <span id="id-spand-storeName" style="color:blueviolet;font-weight:bold"></span>
             </div>
@@ -66,6 +69,7 @@
             <div class="col-1 col-sm-2">
                 <button id="idmodalVendor" type="button" class="btn btn-sm btn-outline-secondary" style="width: 50px;">...</button>
             </div>
+            <div id="divVendorLoader" style="display:none;"> <img src="~/Content/img/ajax-loader.gif" alt="Loader" /> </div>
             <div class="col-sm-4">
                 <span id="id-spand-vendorName" style="color:blueviolet;font-weight:bold"></span>
             </div>
@@ -81,6 +85,7 @@
             <div class="col-sm-2">
                 <button id="idmodalPO" type="button" class="btn btn-sm btn-outline-secondary" style="width: 50px;">...</button>
             </div>
+            <div id="divPOLoader" style="display:none;"> <img src="~/Content/img/ajax-loader.gif" alt="Loader" /> </div>
             <div class="col-sm-4">
                 <span id="id-spand-description" style="color:blueviolet;font-weight:bold"></span>
             </div>
@@ -89,9 +94,24 @@
         <br />
 
         <button id="id-Accept-button" type="button" class="btn btn-sm btn-primary" style="width: 100px;">Accept</button>
+        
+        <div class="col-sm-2" style="float:right;">
+            <br />
+            <div class="btn btn-success">@Html.ActionLink("Create Pdf", "CreatePdf", "Report") </div>
+        </div>
+        <br />
+        <br />
 
-        <br />
-        <br />
+
+        @*<div id="snackbar">
+            <span id="messageContent"></span>
+        </div>*@
+        <div id="id-success-div-message" class="alert alert-success d-none">
+            <strong>Success!</strong>
+            <span id="id-success-span-massage"></span>
+            @*<button type="button" class="close" data-dismiss="alert">&times;</button>*@
+            <span class="close">x</span>
+        </div>
 
         <div id="id-dateFrom-div-message" class="alert alert-danger d-none">
             <strong>Warning!</strong>
@@ -265,6 +285,7 @@
 <div id="divGetPartialPurchaseOrder" data-request-url="@Url.Action("GetPartialPurchaseOrder", "RAL")"></div>
 
 <div id="divReportGeneration" data-request-url="@Url.Action("ReportGeneration", "Report")"></div>
+<div id="divPDFGeneration" data-request-url="@Url.Action("CreatePdf", "Report")"></div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 

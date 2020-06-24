@@ -2,16 +2,22 @@
 $(document).ready(function () {
     $("#idmodalStore").on("click", function (e) {
         e.preventDefault();
+        $('#idmodalStore').prop('disabled', true);
+        $("#divStoreLoader").show();
         LoadStorePartialView();
     });
 
     $("#idmodalVendor").on("click", function (e) {
         e.preventDefault();
+        $('#idmodalVendor').prop('disabled', true);
+        $("#divVendorLoader").show();
         LoadVendorPartialView();
     });
 
     $("#idmodalPO").on("click", function (e) {
         e.preventDefault();
+        $('#idmodalPO').prop('disabled', true);
+        $("#divPOLoader").show();
         LoadPurchaseOrderPartialView();
     });
 
@@ -44,8 +50,12 @@ $(document).ready(function () {
         event.stopPropagation();
     });
 
+
+    //Accept Button Validations
     $("#id-Accept-button").on("click", function (e) {
         e.preventDefault();
+        //No Entry
+        //alert('Accept Button is Clicked');
         if (($('#idFromDate').val() == '')
             && ($('#idToDate').val() == '')
             && ($('#id-text-storeNumber').val() == '')
@@ -57,21 +67,35 @@ $(document).ready(function () {
             return false;
         }
         else {
+            //PO is Selected
             if ($('#id-text-PO').val() != '') {
+                //Date Must be Null
                 if (($('#idFromDate').val() != '') || ($('#idToDate').val() != '')) {
                     $('#id-datefromTo-div-message').removeClass('d-none');
                     $('#id-datefromTo-span-massage').text("If PO Number is selected, Dates Should be zero.");
                 }
-                if ($('#id-text-storeNumber').val() != '') {
-                    $('#id-storenumber-div-message').removeClass('d-none');
-                    $('#id-storenumber-span-massage').text("If PO Number is selected, Store number Should be zero.");
+                //Store and Vendor Must be Zero or Empty
+                else if ($('#id-text-storeNumber').val() != '' || $('#id-text-Vendor').val() != '') {
+                    if ($('#id-text-storeNumber').val() == '0' && $('#id-text-Vendor').val() == '0') {
+                        CreateReports();
+                    }
+                    else if ($('#id-text-storeNumber').val() == '0' && $('#id-text-Vendor').val() == '') {
+                        CreateReports();
+                    }
+                    else if ($('#id-text-storeNumber').val() == '' && $('#id-text-Vendor').val() == '0') {
+                        CreateReports();
+                    }
+                    else {
+                        $('#id-storenumber-div-message').removeClass('d-none');
+                        $('#id-storenumber-span-massage').text("If PO Number is selected, Store number and Vendor number Should be zero.");
+                    }
                 }
-                if ($('#id-text-Vendor').val() != '') {
-                    $('#id-vendor-div-message').removeClass('d-none');
-                    $('#id-vendor-span-massage').text("If PO Number is selected, Vendor Should be zero.");
+                //Create Report
+                else {
+                    CreateReports();
                 }
-                CreateReports();
             }
+            //ReceiptDate is Selected
             else {
                 if (($('#id-text-storeNumber').val() != '') || ($('#id-text-Vendor').val() != '')) {
                     if (($('#idFromDate').val() != '') && ($('#idToDate').val() != '')) {
@@ -79,15 +103,16 @@ $(document).ready(function () {
                     }
                     else {
                         $('#id-datefromTo-div-message').removeClass('d-none');
-                        $('#id-datefromTo-span-massage').text("Dates must be required.");
+                        $('#id-datefromTo-span-massage').text("Check for Required Dates");
                     }
                 }
                 else {
                     $('#id-datefromTo-div-message').removeClass('d-none');
-                    $('#id-datefromTo-span-massage').text("Store Number or vendor must be required.");
+                    $('#id-datefromTo-span-massage').text("Store Number or Vendor must be required.");
                 }
             }
-        }  
+        }
+            
     });
 });
 
@@ -106,20 +131,64 @@ function CreateReports() {
         data: JSON.stringify({ reportModel: report }),
         contentType: 'application/json',
         async: false,
-        success: function (data) {
-            //var url = window.location.href;
-            //window.location.href = url;
-            //$('#idModalEditRoles').modal('hide');
-            //$("#loading").addClass("d-none");
-            $('#id-vendor-div-message').removeClass('d-none');
-            $('#id-vendor-span-massage').text("Successfully processed report..");
-            alert("test");
+        success: function () {
+            CreatePDF();
         },
         error: function (xhr, textStatus, errorThrown) {
             alert(errorThrown);
         }
     });
 }
+
+function CreatePDF() {
+    //<div id="divPDFGeneration" data-request-url="@Url.Action(" CreatePdf", "Report")" ></div >
+    //var pdfAction = '@Url.Action("CreatePdf","Report")';
+    $.ajax({
+        url: $("#divPDFGeneration").data("request-url"),
+        contentType: "application/json; charset=utf-8",
+        success: function () {
+            ClearFields();
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            alert(errorThrown);
+        }
+    });
+}
+
+function ClearFields() {
+
+    $('#id-success-div-message').removeClass('d-none');
+    $('#id-success-span-massage').text("Successfully processed report..");
+
+    $('#id-dateFrom-div-message').addClass('d-none');
+    $('#idFromDate').val("");
+
+    $('#id-dateTo-div-message').addClass('d-none');
+    $('#idToDate').val("");
+
+    $('#id-entry-div-message').addClass('d-none');
+    $('#idToDate').val("");
+
+    $('#id-storenumber-div-message').addClass('d-none');
+    $('#id-text-storeNumber').val("");
+    $('#id-spand-storeName').val("");
+
+    $('#id-vendor-div-message').addClass('d-none');
+    $('#id-text-Vendor').val("");
+    $('#id-spand-vendorName').val("");
+
+    $('#id-po-div-message').addClass('d-none');
+    $('#id-text-PO').val("");
+    $('#id-spand-description').val("");
+
+    $('#id-datefromTo-div-message').addClass('d-none');
+    $('#idFromDate').val("");
+    $('#idToDate').val("");
+}
+
+$('#id-success-div-message .close').click(function () {
+    $('#id-success-div-message').addClass('d-none');
+});
 
 $('#id-dateFrom-div-message .close').click(function () {
     $('#id-dateFrom-div-message').addClass('d-none');
@@ -154,6 +223,7 @@ $('#id-datefromTo-div-message .close').click(function () {
     $('#idToDate').val("");
 });
 
+
 function LoadStorePartialView() {
     //PageLoader();
     $.ajax({
@@ -163,6 +233,8 @@ function LoadStorePartialView() {
         data: { filter: $('#idsearchFormControlSelect').val(), value: $('#id-text-storeNumbet-at').val() },
         contentType: false,
         success: function (data) {
+            $("#divStoreLoader").hide();
+            $('#idmodalStore').prop('disabled', false);
             $("#DivStoreList").html(data);
             $('#idModalStoreView').modal('show');
         },
@@ -181,6 +253,8 @@ function LoadVendorPartialView() {
         data: { value: $('#id-text-vendor-at').val() },
         contentType: false,
         success: function (data) {
+            $("#divVendorLoader").hide(); 
+            $('#idmodalVendor').prop('disabled', false);
             $("#DiVendorList").html(data);
             $('#idModalVendorView').modal('show');
         },
@@ -199,6 +273,8 @@ function LoadPurchaseOrderPartialView() {
         data: { value: $('#id-text-PO-at').val() },
         contentType: false,
         success: function (data) {
+            $("#divPOLoader").hide();
+            $('#idmodalPO').prop('disabled', false);
             $("#DivPOList").html(data);
             $('#idModalPOView').modal('show');
         },

@@ -40,6 +40,20 @@ namespace RALProject.Infrastructure.Repository
         public DomainEntity.ReportEntity GetById(int id)
         {
             throw new NotImplementedException();
+            //return _rALDbContext.ReportTables
+            //        .Where(r => r.PONUMB == id)
+            //        .Select(r => new DomainEntity.ReportEntity
+            //        {
+            //            id = r.id,
+            //            pONumber = r.PONUMB,
+            //            p
+            //            //code = r.code,
+            //            //name = r.name,
+            //            //short_name = r.short_name,
+            //            //jda_library = r.jda_library,
+            //            //jda_ip_address = r.jda_ip_address,
+            //            //jda_linked_server_catalog = r.jda_linked_server_catalog
+            //        }).FirstOrDefault();
         }
 
         public IEnumerable<DomainEntity.ReportEntity> Find(Expression<Func<DomainEntity.ReportEntity, bool>> predicate)
@@ -54,31 +68,39 @@ namespace RALProject.Infrastructure.Repository
 
         public void AddReport(IEnumerable<DomainEntity.ReportEntity> entity)
         {
-            entity.ToList().ForEach(a =>
+            try
             {
-                var report = new LoginData.ReportTable();
+                entity.ToList().ForEach(a =>
+                {
+                    var report = new LoginData.ReportTable();
 
-                report.report_id = a.report_id;
-                report.PONUMB = a.pONumber;
-                report.POMRCV = a.rANumber;
-                report.ASAUTO = a.aSAuto;
-                report.POLOC = a.storeNumber;
-                report.STRNAM = a.storeName;
-                report.POVNUM = a.vendorCode;
-                report.ASNAME = a.vendorName;
-                report.POSDAT = a.receivingDate;
-                report.POCDAT = a.cancelDate;
-                report.IVPLTI = a.ti;
-                report.IVPLHI = a.hi;
-                report.LOCATION = a.Location;
-                report.INUMBR = a.iNumber;
-                report.IDESCR = a.iDecription;
-                report.IUPC = a.upc;
-                report.POMUM = a.um;
-                report.ORDERQTY = a.orderQty;
+                    report.report_id = a.report_id;
+                    report.PONUMB = a.pONumber;
+                    report.POMRCV = a.rANumber;
+                    report.ASAUTO = a.aSAuto;
+                    report.POLOC = a.storeNumber;
+                    report.STRNAM = a.storeName;
+                    report.POVNUM = a.vendorCode;
+                    report.ASNAME = a.vendorName;
+                    report.POSDAT = a.receivingDate;
+                    report.POCDAT = a.cancelDate;
+                    report.IVPLTI = a.ti;
+                    report.IVPLHI = a.hi; 
+                    report.LOCATION = a.Location;
+                    report.INUMBR = a.iNumber;
+                    report.IDESCR = a.iDecription;
+                    report.IUPC = a.upc;
+                    report.POMUM = a.um;
+                    report.ORDERQTY = a.orderQty;
 
-                _rALDbContext.ReportTables.Add(report);
-            });
+                    _rALDbContext.ReportTables.Add(report);
+                    _rALDbContext.SaveChanges();
+                });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         public void Update(DomainEntity.ReportEntity entity)
