@@ -49,10 +49,12 @@
             </div>
 
             @*Button Modal*@
-            <div class="col-sm-2">
+            <div class="col-sm-1">
                 <button id="idmodalStore" type="button" class="btn btn-sm btn-outline-secondary" style="width: 50px;">...</button>
             </div>
-            <div id="divStoreLoader" style="display:none;"> <img src="~/Content/img/ajax-loader.gif" alt="Loader" /> </div>
+            <div class="col-sm-1">
+                <div id="divStoreLoader" style="display:none;"> <img src="~/Content/img/ajax-loader.gif" alt="Loader" /> </div>
+            </div>
             @*Display Store Name at the Right Side*@
             <div class="col-sm-4">
                 <span id="id-spand-storeName" style="color:blueviolet;font-weight:bold"></span>
@@ -66,10 +68,12 @@
             <div class="col-sm-4">
                 @Html.TextBox("txtBox2", "", new { id = "id-text-Vendor", @class = "form-control form-control-sm", maxlength = 150 })
             </div>
-            <div class="col-1 col-sm-2">
+            <div class="col-1">
                 <button id="idmodalVendor" type="button" class="btn btn-sm btn-outline-secondary" style="width: 50px;">...</button>
             </div>
-            <div id="divVendorLoader" style="display:none;"> <img src="~/Content/img/ajax-loader.gif" alt="Loader" /> </div>
+            <div class="col-sm-1">
+                <div id="divVendorLoader" style="display:none;"> <img src="~/Content/img/ajax-loader.gif" alt="Loader" /> </div>
+            </div>
             <div class="col-sm-4">
                 <span id="id-spand-vendorName" style="color:blueviolet;font-weight:bold"></span>
             </div>
@@ -82,10 +86,12 @@
             <div class="col-sm-4">
                 @Html.TextBox("txtBox3", "", new { id = "id-text-PO", @class = "form-control form-control-sm", maxlength = 150 })
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-1">
                 <button id="idmodalPO" type="button" class="btn btn-sm btn-outline-secondary" style="width: 50px;">...</button>
             </div>
-            <div id="divPOLoader" style="display:none;"> <img src="~/Content/img/ajax-loader.gif" alt="Loader" /> </div>
+            <div class="col-sm-1">
+                <div id="divPOLoader" style="display:none;"> <img src="~/Content/img/ajax-loader.gif" alt="Loader" /> </div>
+            </div>
             <div class="col-sm-4">
                 <span id="id-spand-description" style="color:blueviolet;font-weight:bold"></span>
             </div>
@@ -93,12 +99,18 @@
 
         <br />
 
-        <button id="id-Accept-button" type="button" class="btn btn-sm btn-primary" style="width: 100px;">Accept</button>
-        
-        <div class="col-sm-2" style="float:right;">
-            <br />
-            <div class="btn btn-success">@Html.ActionLink("Create Pdf", "CreatePdf", "Report") </div>
+        <div class="row my-1">
+            <div class="col-1">
+                <button id="id-Accept-button" type="button" class="btn btn-sm btn-primary" style="width: 100px;">Accept</button>
+            </div>
+            @*<div class="col-2" style="border:1px solid black;">
+                <div id="divRALLoader" style="align-content:center;">
+                    <img src="~/Content/img/report-lodaer.gif" alt="Loader" />
+                </div>
+            </div>*@
         </div>
+       
+  
         <br />
         <br />
 
@@ -234,7 +246,7 @@
                                 <button id="id-po-vendor-button" class="btn btn-primary btn-sm" type="button">Search</button>
                             </div>
                         </div>
-                        
+
                     </div>
                     <br />
                     <br />
@@ -286,6 +298,11 @@
 
 <div id="divReportGeneration" data-request-url="@Url.Action("ReportGeneration", "Report")"></div>
 <div id="divPDFGeneration" data-request-url="@Url.Action("CreatePdf", "Report")"></div>
+
+@*F3 Filtering*@
+<div id="divGetStoreByID" data-request-url="@Url.Action("GetStoreByID", "RAL")"></div>
+<div id="divGetVendorByID" data-request-url="@Url.Action("GetVendorByID", "RAL")"></div>
+<div id="divGetPOByID" data-request-url="@Url.Action("GetPOByID", "RAL")"></div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 

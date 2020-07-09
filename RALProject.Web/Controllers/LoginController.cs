@@ -40,24 +40,25 @@ namespace RALProject.Web.Controllers
         //
         // GET: /Login/
 
-        public ActionResult Indexs()
+        public ActionResult Index()
         {
             var login = new LoginModel();
             login.business_unit_List = _mapper.Map<IEnumerable<BusinessUnitDto>, IEnumerable<BusinessUnitModel>>
                     (_rALServices.BusinessUnitAll());
+
             return View(login);
         }
 
-        public ActionResult Index()
+        public ActionResult GetLastLogin(string username)
         {
-            var buList = new LoginModel();
-            buList.business_unit_List = _mapper.Map<IEnumerable<BusinessUnitDto>, IEnumerable<BusinessUnitModel>>
-                (_rALServices.BusinessUnitAll());
-            return View(buList);
+            IEnumerable<LastLoginModel> lastlogin = new List<LastLoginModel>();
+            lastlogin = _mapper.Map<IEnumerable<LastLoginDto>, IEnumerable<LastLoginModel>>
+                (_rALServices.LastLoginByUsername(username));
+
+            return Json(lastlogin);
         }
 
-
-        public JsonResult Login(LoginModel model)
+        public JsonResult Login(LoginModel model,int lastLogin)
         {
             Guid reportId = Guid.NewGuid();
             var bu = _rALServices.BusinessUnitById(Convert.ToInt32(model.servername));
@@ -79,15 +80,45 @@ namespace RALProject.Web.Controllers
             if (_rALServices.GetLoginByConnectionString(newLogin) == true)
             {
                 DisposeDependency();
-                return new JsonResult()
+               
+                if (lastLogin > 0)
                 {
-                    JsonRequestBehavior = JsonRequestBehavior.AllowGet,
-                    Data = new
+                    return new JsonResult()
                     {
-                        responseText = "Success",
-                        redirectToUrl = Url.Action("Index", "Home", new { dbname = bu.code + " - " + bu.jda_ip_address + " - " + bu.jda_library })
-                    }
-                };
+                        JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                        Data = new
+                        {
+                          
+                            responseText = "Success",
+                            redirectToUrl = Url.Action("Index", "Home", new { dbname = bu.code + " - " + bu.jda_ip_address + " - " + bu.jda_library })
+                        }
+                    };
+                }
+                else
+                {
+                    //Insert New Record
+                    var jda_connection = bu.code + " - " + bu.jda_ip_address;
+
+                    LastLoginDto newLastLogin = new LastLoginDto
+                    {
+                        username = newLogin.username,
+                        jda_connection = jda_connection,
+                        jda_connection_id = Convert.ToInt32(model.servername)
+                    };
+
+                    _rALServices.AddLastLogin(newLastLogin);
+               
+                    return new JsonResult()
+                    {
+                        JsonRequestBehavior = JsonRequestBehavior.AllowGet,
+                        Data = new
+                        {
+                            responseText = "Success",
+                            redirectToUrl = Url.Action("Index", "Home", new { dbname = bu.code + " - " + bu.jda_ip_address + " - " + bu.jda_library })
+                        }
+                    };
+                }
+               
             }
                
             else
@@ -99,15 +130,13 @@ namespace RALProject.Web.Controllers
                     Data = new
                     {
                         responseText = "Failed",
-                        //responseText = "Success",
                         redirectToUrl = Url.Action("Index", "Login")
-                        //redirectToUrl = Url.Action("Index", "Home", new { dbname = bu.code + " - " + bu.jda_ip_address + " - " + bu.jda_library })
                     }
                 };
             }
                 
         }
-
+       
         public ActionResult Logout()
         {
             FormsAuthentication.SignOut();

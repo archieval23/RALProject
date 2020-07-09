@@ -1,11 +1,14 @@
 ﻿
 $(document).ready(function () {
+
     $(".clsselectstore").on("click", function (e) {
         e.preventDefault();
         var thisElement = this;
         $("#id-text-storeNumber").val(thisElement.parentElement.parentElement.children[1].innerText.trim());
         $("#id-spand-storeName").text(thisElement.parentElement.parentElement.children[4].innerText.trim());
+        $("#id-spand-storeName").css("color", "blueviolet");
         $('#idModalStoreView').modal('hide');
+        
     });
 
     $(".cls-select-vendor").on("click", function (e) {
@@ -13,6 +16,7 @@ $(document).ready(function () {
         var thisElement = this;
         $("#id-text-Vendor").val(thisElement.parentElement.parentElement.children[2].innerText.trim());
         $("#id-spand-vendorName").text(thisElement.parentElement.parentElement.children[3].innerText.trim());
+        $("#id-spand-vendorName").css("color", "blueviolet");
         $('#idModalVendorView').modal('hide');
     });
 
@@ -21,5 +25,8 @@ $(document).ready(function () {
         var thisElement = this;
         $("#id-text-PO").val(thisElement.parentElement.parentElement.children[2].innerText.trim());
         $('#idModalPOView').modal('hide');
+
     });
+
+   
 });

@@ -68,6 +68,7 @@
     <Compile Include="Domain\IAggregateRoot.cs" />
     <Compile Include="Entities\BusinessUnitEntity.cs" />
     <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\LastLoginEntity.cs" />
     <Compile Include="Entities\LoginEntity.cs" />
     <Compile Include="Entities\POEntity.cs" />
     <Compile Include="Entities\ReportEntity.cs" />

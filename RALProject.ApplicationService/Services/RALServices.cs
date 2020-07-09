@@ -69,6 +69,46 @@ namespace RALProject.ApplicationService.Services
                 throw;
             }
         }
+        public IEnumerable<LastLoginDto> LastLoginByUsername(string username)
+        {
+            try
+            {
+                return _mapper.Map<IEnumerable<LastLoginEntity>, IEnumerable<LastLoginDto>>
+                    (_loginRepository.GetLastLoginByUsername(username));
+            }
+            catch (Exception ex)
+            {
+                logCentral.Error("BusinessUnitAll", ex);
+                throw;
+            }
+        }
+        public void AddLastLogin(LastLoginDto lastlogindto)
+        {
+            try
+            {
+                LastLoginEntity newLastLogin = LastLoginEntity.Create(_mapper.Map<LastLoginDto, LastLoginEntity>(lastlogindto));
+                if (newLastLogin != null)
+                {
+                    _loginRepository.AddLastLogin(newLastLogin);
+                   
+                }
+                else
+                {
+                    logCentral.Info("Create User Profile: Invalid User Profile information");
+                }
+                //LastLoginEntity lastLoginEntity = new LastLoginEntity();
+                //lastLoginEntity.username = lastlogindto.username;
+                //lastLoginEntity.jda_connection = lastlogindto.jda_connection;
+                //lastLoginEntity.jda_connection_id = lastlogindto.jda_connection_id;
+
+                //_loginRepository.AddLastLogin(lastLoginEntity);
+            }
+            catch (Exception ex)
+            {
+                logCentral.Error("Create Report", ex);
+                throw;
+            }
+        }
 
         public BusinessUnitDto BusinessUnitById(int id)
         {
@@ -185,5 +225,7 @@ namespace RALProject.ApplicationService.Services
         {
             _rALUnitOfWork.Dispose();
         }
+
+     
     }
 }

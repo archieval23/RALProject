@@ -70,6 +70,7 @@ namespace RALProject.Infrastructure.Repository
         {
             try
             {
+                _rALDbContext.Database.ExecuteSqlCommand("TRUNCATE TABLE ReportTable");
                 entity.ToList().ForEach(a =>
                 {
                     var report = new LoginData.ReportTable();
@@ -94,7 +95,7 @@ namespace RALProject.Infrastructure.Repository
                     report.ORDERQTY = a.orderQty;
 
                     _rALDbContext.ReportTables.Add(report);
-                    _rALDbContext.SaveChanges();
+                    
                 });
             }
             catch (Exception ex)
@@ -127,23 +128,23 @@ namespace RALProject.Infrastructure.Repository
                     {
                         if (entity.pONumber != 0)
                         {
-                            query = " AND a.PONUMB = " + entity.pONumber + " ";
+                            query = " AND b.ASAUTO in ('S','C') AND a.PONUMB = " + entity.pONumber + " ";
                         }
                         else 
                         {
                             if (entity.storeNumber != 0 && entity.vendorCode == 0)
                             {
-                                query = " AND a.POLOC = " + entity.storeNumber + " AND  d.POSDAT BETWEEN " + entity.receivingDate + " AND " + entity.cancelDate + "";
+                                query = " AND b.ASAUTO in ('S','C') AND c.STRNUM = " + entity.storeNumber + " AND  d.POSDAT BETWEEN " + entity.receivingDate + " AND " + entity.cancelDate + "";
                             }
 
                             if (entity.storeNumber == 0 && entity.vendorCode != 0)
                             {
-                                query = " AND a.POVNUM = " + entity.vendorCode + " AND  d.POSDAT BETWEEN " + entity.receivingDate + " AND " + entity.cancelDate + "";
+                                query = " AND b.ASAUTO in ('S','C') AND b.ASNUM = " + entity.vendorCode + " AND  d.POSDAT BETWEEN " + entity.receivingDate + " AND " + entity.cancelDate + "";
                             }
 
                             if (entity.storeNumber != 0 && entity.vendorCode != 0)
                             {
-                                query = " AND a.POVNUM = " + entity.vendorCode + " AND  d.POLOC = " + entity.storeNumber + " AND  d.POSDAT BETWEEN " + entity.receivingDate + " AND " + entity.cancelDate + "";
+                                query = " AND b.ASAUTO in ('S','C') AND b.ASNUM = " + entity.vendorCode + " AND  C.STRNUM = " + entity.storeNumber + " AND  d.POSDAT BETWEEN " + entity.receivingDate + " AND " + entity.cancelDate + "";
                             }
                         }
 

@@ -45,7 +45,7 @@ namespace RALProject.Web.Controllers
             return View();
         }
 
-        public ActionResult GetPartialStore(string filter = "", int value = 0)
+        public ActionResult GetPartialStore(string sorting_order = "", string filter = "", int value = 0)
         {
             try
             {
@@ -106,7 +106,102 @@ namespace RALProject.Web.Controllers
                 throw;
             }
         }
+        public ActionResult GetStoreByID(int value = 0)
+        {
+            try
+            {
+                IEnumerable<StoreModel> store = new List<StoreModel>();
 
+                StoreDto newStore = new StoreDto
+                {
+                    login_dto = new LoginDto
+                    {
+                        servername = Session["servername"].ToString(),
+                        username = Session["username"].ToString(),
+                        password = Session["password"].ToString(),
+                        dBname = Session["databasename"].ToString()
+                    },
+                };
+
+                store = _mapper.Map<IEnumerable<StoreDto>, IEnumerable<StoreModel>>
+                (
+                    _rALServices.GetStore(newStore)
+                ).Where(a => a.store == value).OrderBy(n => n.store);
+
+
+                return Json(store);
+                   
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = "System Error: " + ex.Message;
+                throw;
+            }
+        }
+        public ActionResult GetVendorByID(int value = 0)
+        {
+            try
+            {
+                IEnumerable<VendorModel> vendor = new List<VendorModel>();
+
+                VendorDto newVendor = new VendorDto
+                {
+                    login_dto = new LoginDto
+                    {
+                        servername = Session["servername"].ToString(),
+                        username = Session["username"].ToString(),
+                        password = Session["password"].ToString(),
+                        dBname = Session["databasename"].ToString()
+                    },
+                };
+
+                vendor = _mapper.Map<IEnumerable<VendorDto>, IEnumerable<VendorModel>>
+                (
+                    _rALServices.GetVendor(newVendor)
+                ).Where(a => a.vendorNumber == value).OrderBy(n => n.vendorNumber);
+
+
+                return Json(vendor);
+
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = "System Error: " + ex.Message;
+                throw;
+            }
+        }
+        public ActionResult GetPOByID(int value = 0)
+        {
+            try
+            {
+                IEnumerable<POModel> po = new List<POModel>();
+
+                PODto newPO = new PODto
+                {
+                    login_dto = new LoginDto
+                    {
+                        servername = Session["servername"].ToString(),
+                        username = Session["username"].ToString(),
+                        password = Session["password"].ToString(),
+                        dBname = Session["databasename"].ToString()
+                    },
+                };
+
+                po = _mapper.Map<IEnumerable<PODto>, IEnumerable<POModel>>
+                (
+                    _rALServices.PODataAll(newPO)
+                ).Where(a => a.pONumber == value).OrderBy(n => n.pONumber);
+
+
+                return Json(po);
+
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = "System Error: " + ex.Message;
+                throw;
+            }
+        }
         public ActionResult GetPartialVendor(string value = "")
         {
             try

@@ -16,5 +16,7 @@ namespace RALProject.ApplicationService.ServiceContract
         IEnumerable<PODto> PODataAll(PODto podto);
         IEnumerable<StoreDto> GetStore(StoreDto storedto);
         IEnumerable<VendorDto> GetVendor(VendorDto vendordto);
+        IEnumerable<LastLoginDto> LastLoginByUsername(string username);
+        void AddLastLogin(LastLoginDto lastLoginDto);
     }
 }

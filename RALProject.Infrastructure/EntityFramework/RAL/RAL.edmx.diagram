@@ -7,6 +7,8 @@
       <Diagram DiagramId="b5d5272e567b4b8e8a5cac245f2aa8a7" Name="Diagram1">
         <EntityTypeShape EntityType="RAL_DevModel.UserServerDefult" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="RAL_DevModel.ReportTable" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="RAL_DevModel.Business_UnitsTable" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="RAL_DevModel.Last_LogIn" Width="1.5" PointX="6.125" PointY="1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

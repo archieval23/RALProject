@@ -10,5 +10,7 @@ namespace RALProject.Domain.Contracts
     public interface ILoginRepository : IRepository<LoginEntity>
     {
         bool GetByConnectionString(LoginEntity entity);
+        IEnumerable<LastLoginEntity> GetLastLoginByUsername(string username);
+        void AddLastLogin(LastLoginEntity lastLoginEntity);
     }
 }

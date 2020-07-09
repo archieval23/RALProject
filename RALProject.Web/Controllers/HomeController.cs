@@ -34,7 +34,7 @@ namespace RALProject.Web.Controllers
             if (mapper == null) throw new ArgumentNullException("Mapper");
 
             _rALServices = rALServices;
-            _mapper = mapper;
+            _mapper = mapper; 
         }
         //
         // GET: /RAL/

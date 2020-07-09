@@ -3,7 +3,6 @@ using Microsoft.Practices.Unity;
 using Unity.Mvc4;
 using RALProject.ApplicationService.ServiceContract;
 using RALProject.ApplicationService.Services;
-using RALProject.Infrastructure.EntityFramework.Common;
 using RALProject.Infrastructure.EntityFramework.RAL;
 using AutoMapper;
 using RALProject.Domain.Contracts;
@@ -28,7 +27,6 @@ namespace RALProject.Web
             var container = new UnityContainer();
 
             container.RegisterType<IRALUnitOfWork, RALUnitOfWork>(new HierarchicalLifetimeManager());
-            container.RegisterType<ICommonUnitOfWork, CommonUnitOfWork>(new HierarchicalLifetimeManager());
             // register all your components with the container here
             // it is NOT necessary to register your controllers
 

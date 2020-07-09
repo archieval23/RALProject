@@ -19,6 +19,7 @@ namespace RALProject.Web
             CreateMap<StoreDto, StoreModel>().ReverseMap();
             CreateMap<UserServerDefaultDto, UserServerDefaultModel>().ReverseMap();
             CreateMap<VendorDto, VendorModel>().ReverseMap();
+            CreateMap<LastLoginDto, LastLoginModel>().ReverseMap();
         }
     }
 }

@@ -12,7 +12,17 @@
     <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="@Url.Action("Logout", "Login")" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@Session["AppServerName"].ToString()</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                    @if (@Session["AppServerName"] != null)
+                    {
+                        @Session["AppServerName"].ToString()
+                    }
+                    else
+                    {
+                        Response.Redirect("~/Login");
+                    }
+                </span>
+                @*<span class="mr-2 d-none d-lg-inline text-gray-600 small">@ViewBag.strBU</span>*@
                 <img class="img-profile rounded-circle" src="~/Content/img/rrhi_logo.png">
             </a>
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">

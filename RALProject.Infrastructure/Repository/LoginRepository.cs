@@ -8,6 +8,7 @@ using LoginData = RALProject.Infrastructure.EntityFramework.RAL;
 using System.Data.SqlClient;
 using System.Data;
 using System.Data.Odbc;
+using System.Linq;
 
 namespace RALProject.Infrastructure.Repository
 {
@@ -35,6 +36,19 @@ namespace RALProject.Infrastructure.Repository
         {
             throw new NotImplementedException();
         }
+        public IEnumerable<DomainEntity.LastLoginEntity> GetLastLoginByUsername(string username)
+        {
+            return _rALDbContext.Last_LogIn
+                       .Where(r => r.username == username)
+                       .Select(r => new DomainEntity.LastLoginEntity
+                       {
+                           id = r.id,
+                           username = r.username,
+                           jda_connection = r.jda_connection,
+                           jda_connection_id = r.jda_connection_id,
+                       })
+                       .ToList();
+        }
 
         public DomainEntity.LoginEntity GetById(int id)
         {
@@ -49,6 +63,21 @@ namespace RALProject.Infrastructure.Repository
         public void Add(DomainEntity.LoginEntity entity)
         {
             throw new NotImplementedException();
+        }
+        public void AddLastLogin(DomainEntity.LastLoginEntity entity)
+        {
+            try
+            {
+                using (var datacontext = new LoginData.RAL_DevEntities())
+                {
+                    datacontext.Last_LogIn.Add(_mapper.Map<DomainEntity.LastLoginEntity, LoginData.Last_LogIn>(entity));
+                    datacontext.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         public void Update(DomainEntity.LoginEntity entity)

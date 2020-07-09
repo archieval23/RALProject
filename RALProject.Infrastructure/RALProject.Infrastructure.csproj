@@ -67,25 +67,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntityFramework\Common\business_units.cs">
-      <DependentUpon>Common.tt</DependentUpon>
+    <Compile Include="EntityFramework\RAL\Business_UnitsTable.cs">
+      <DependentUpon>RAL.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFramework\Common\Common.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Common.Context.tt</DependentUpon>
+    <Compile Include="EntityFramework\RAL\Last_LogIn.cs">
+      <DependentUpon>RAL.tt</DependentUpon>
     </Compile>
-    <Compile Include="EntityFramework\Common\Common.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Common.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFramework\Common\Common.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Common.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="EntityFramework\Common\CommonUnitOfWork.cs" />
     <Compile Include="EntityFramework\RAL\RALUnitOfWork.cs" />
     <Compile Include="EntityFramework\RAL\RAL.Context.cs">
       <AutoGen>True</AutoGen>
@@ -130,13 +117,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>RAL.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <EntityDeploy Include="EntityFramework\Common\Common.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Common.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="EntityFramework\Common\Common.edmx.diagram">
-      <DependentUpon>Common.edmx</DependentUpon>
-    </None>
     <None Include="EntityFramework\RAL\RAL.edmx.diagram">
       <DependentUpon>RAL.edmx</DependentUpon>
     </None>
@@ -146,16 +126,6 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="EntityFramework\Common\Common.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Common.edmx</DependentUpon>
-      <LastGenOutput>Common.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="EntityFramework\Common\Common.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Common.edmx</DependentUpon>
-      <LastGenOutput>Common.cs</LastGenOutput>
-    </Content>
     <Content Include="EntityFramework\RAL\RAL.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>RAL.edmx</DependentUpon>

@@ -5,6 +5,25 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="RAL_DevModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Business_UnitsTable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="code" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="jda_library" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="jda_ip_address" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Last_LogIn">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="jda_connection" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="jda_connection_id" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="ReportTable">
           <Key>
             <PropertyRef Name="id" />
@@ -45,6 +64,8 @@
           <Property Name="date_deleted" Type="datetime" />
         </EntityType>
         <EntityContainer Name="RAL_DevModelStoreContainer">
+          <EntitySet Name="Business_UnitsTable" EntityType="Self.Business_UnitsTable" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Last_LogIn" EntityType="Self.Last_LogIn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReportTable" EntityType="Self.ReportTable" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserServerDefult" EntityType="Self.UserServerDefult" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
@@ -70,6 +91,8 @@
         <EntityContainer Name="RAL_DevEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="UserServerDefults" EntityType="Self.UserServerDefult" />
           <EntitySet Name="ReportTables" EntityType="RAL_DevModel.ReportTable" />
+          <EntitySet Name="Business_UnitsTable" EntityType="RAL_DevModel.Business_UnitsTable" />
+          <EntitySet Name="Last_LogIn" EntityType="RAL_DevModel.Last_LogIn" />
         </EntityContainer>
         <EntityType Name="ReportTable">
           <Key>
@@ -94,6 +117,25 @@
           <Property Name="IUPC" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="POMUM" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="ORDERQTY" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Business_UnitsTable">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="code" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="jda_library" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="jda_ip_address" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Last_LogIn">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="jda_connection" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="jda_connection_id" Type="Int32" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -138,6 +180,27 @@
                 <ScalarProperty Name="POMRCV" ColumnName="POMRCV" />
                 <ScalarProperty Name="PONUMB" ColumnName="PONUMB" />
                 <ScalarProperty Name="report_id" ColumnName="report_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Business_UnitsTable">
+            <EntityTypeMapping TypeName="RAL_DevModel.Business_UnitsTable">
+              <MappingFragment StoreEntitySet="Business_UnitsTable">
+                <ScalarProperty Name="jda_ip_address" ColumnName="jda_ip_address" />
+                <ScalarProperty Name="jda_library" ColumnName="jda_library" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Last_LogIn">
+            <EntityTypeMapping TypeName="RAL_DevModel.Last_LogIn">
+              <MappingFragment StoreEntitySet="Last_LogIn">
+                <ScalarProperty Name="jda_connection_id" ColumnName="jda_connection_id" />
+                <ScalarProperty Name="jda_connection" ColumnName="jda_connection" />
+                <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

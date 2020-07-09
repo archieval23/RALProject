@@ -27,5 +27,7 @@ namespace RALProject.Infrastructure.EntityFramework.RAL
     
         public DbSet<UserServerDefult> UserServerDefults { get; set; }
         public DbSet<ReportTable> ReportTables { get; set; }
+        public DbSet<Business_UnitsTable> Business_UnitsTable { get; set; }
+        public DbSet<Last_LogIn> Last_LogIn { get; set; }
     }
 }

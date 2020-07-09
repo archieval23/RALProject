@@ -14,6 +14,7 @@ namespace RALProject.Web
         protected override void Configure()
         {
             CreateMap<DomainEntity.UserServerDefaultEntity, UserServerDefult>().ReverseMap();
+            CreateMap<DomainEntity.LastLoginEntity, Last_LogIn>().ReverseMap();
         }
     }
 }

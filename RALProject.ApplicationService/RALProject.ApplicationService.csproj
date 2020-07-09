@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTOs\BusinessUnitDto.cs" />
+    <Compile Include="DTOs\LastLoginDto.cs" />
     <Compile Include="DTOs\LoginDto.cs" />
     <Compile Include="DTOs\PODto.cs" />
     <Compile Include="DTOs\ReportDto.cs" />

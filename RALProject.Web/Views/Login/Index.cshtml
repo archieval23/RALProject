@@ -14,6 +14,7 @@
     <title>Authentication</title>
 </head>
 <body>
+    <input type="hidden" id="lastloginCount" />
     <div class="container-fluid cont-div">
         <div class="row align-items-center h-100">
             <div class="col-xl-12 col-lg-12 col-md-10 col-sm-10 col-12 mx-auto p-0">
@@ -25,8 +26,18 @@
                         <h5 class="lb-login">Login</h5>
 
                         <div class="form-group login-form">
+                            <i class="fas fa-user-alt"></i>
+                            <input type="text" class="form-control login-text-form" id="uname" placeholder="Username">
+                        </div>
+
+                        <div class="form-group login-form">
+                            <i class="fas fa-key"></i>
+                            <input type="password" class="form-control login-text-form" id="pass" placeholder="Password">
+                        </div>
+
+                        <div class="form-group login-form">
                             <select id="serverName" class="form-control">
-                                <option value="" selected disabled hidden>Choose here ...</option>
+                                <option id="optionName" value="" selected disabled hidden>Choose here ...</option>
                                 @foreach (var item in Model.business_unit_List)
                                 {
                                     var severname = @item.code.ToString() + " - " + @item.jda_ip_address.ToString();
@@ -35,16 +46,6 @@
                                     </option>
                                 }
                             </select>
-                        </div>
-
-                        <div class="form-group login-form">
-                            <i class="fas fa-user-alt"></i>
-                            <input type="text" class="form-control login-text-form" id="uname" placeholder="Username">
-                        </div>
-
-                        <div class="form-group login-form">
-                            <i class="fas fa-key"></i>
-                            <input type="password" class="form-control login-text-form" id="pass" placeholder="Password">
                         </div>
 
                         <button type="submit" id="idLoginButton" class="btn btn-primary" onclick="Authenticate()">Sign In</button>
@@ -58,7 +59,9 @@
     </div>
 
     <div id="divLogin" data-request-url="@Url.Action("Login", "Login")"></div>
+    <div id="divCheckLastLogin" data-request-url="@Url.Action("GetLastLogin", "Login")"></div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/Scripts/RALProject/Login.js")
 </body>
